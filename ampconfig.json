@@ -1,0 +1,19 @@
+{
+  "dataServiceGeneratorVersion": "0.11.2",
+  "appInfo": {
+    "name": "Account-Manager",
+    "description": "",
+    "version": "jw7cg3e9",
+    "id": "ckyklxuym141345201s6cj2vh0cm",
+    "url": "https://app.amplication.com/ckyklxuym141345201s6cj2vh0cm",
+    "settings": {
+      "dbHost": "localhost",
+      "dbName": "accountmanager",
+      "dbPassword": "root",
+      "dbPort": 5432,
+      "dbUser": "postgres",
+      "appId": "ckyklxuym141345201s6cj2vh0cm",
+      "authProvider": "Jwt"
+    }
+  }
+}

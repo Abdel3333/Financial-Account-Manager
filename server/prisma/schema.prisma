@@ -1,0 +1,52 @@
+datasource postgres {
+  provider = "postgresql"
+  url      = env("POSTGRESQL_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  apikey    String?  @unique
+  createdAt DateTime @default(now())
+  firstName String?
+  id        String   @id @default(cuid())
+  lastName  String?
+  password  String
+  roles     String[]
+  updatedAt DateTime @updatedAt
+  username  String   @unique
+}
+
+model Account {
+  createdAt            DateTime      @default(now())
+  creditedtransactions Transaction[] @relation(name: "creditedAccount")
+  debitedTransactions  Transaction[] @relation(name: "debitedAccount")
+  id                   String        @id @default(cuid())
+  name                 String?
+  number               String?       @unique
+  type                 String?
+  updatedAt            DateTime      @updatedAt
+}
+
+model Transaction {
+  amount            Float
+  createdAt         DateTime            @default(now())
+  creditedAccount   Account?            @relation(name: "creditedAccount", fields: [creditedAccountId], references: [id])
+  creditedAccountId String?
+  debitedAccount    Account?            @relation(name: "debitedAccount", fields: [debitedAccountId], references: [id])
+  debitedAccountId  String?
+  externalReference String?
+  id                String              @id @default(cuid())
+  metadata          Json?
+  reason            String?
+  reference         String?             @unique
+  type              EnumTransactionType
+  updatedAt         DateTime            @updatedAt
+}
+
+enum EnumTransactionType {
+  credit
+  debit
+}
